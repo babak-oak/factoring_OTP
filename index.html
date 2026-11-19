@@ -1,8 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Фінансування SmartTender × ОТП</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Onest:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<title>Фінансування Тендер+ × Банк</title>
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 /* Layout: кабінет постачальника — навбар, список перемог як робочий реєстр, модальні кроки поверх; зверху тонка демо-панель прототипу */
 :root{
@@ -229,7 +227,7 @@ main{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
     <button id="v-cab" aria-pressed="true">Особистий кабінет</button>
     <button id="v-mail" aria-pressed="false">Пошта клієнта <span class="count" id="mail-count"></span></button>
   </div>
-  <label>Компанія — клієнт ОТП Банку:
+  <label>Компанія — клієнт Банку:
     <select id="otpclient">
       <option value="no">Ні, рахунку немає</option>
       <option value="yes">Так, рахунок уже є</option>
@@ -246,7 +244,7 @@ main{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
 
 <header class="nav">
   <div class="nav-in">
-    <div class="logo"><i aria-hidden="true"></i>SmartTender</div>
+    <div class="logo"><i aria-hidden="true"></i>Тендер+</div>
     <nav class="nav-links" aria-label="Розділи кабінету">
       <span>Пошук торгів</span><span>Мої пропозиції</span><span class="on">Мої перемоги</span><span>Документи</span>
     </nav>
@@ -267,7 +265,7 @@ main{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
 
 <script>
 (function(){
-const BANK = 'ОТП Банк', BANK_GEN = 'ОТП Банку', BANK_LEGAL = 'АТ «ОТП БАНК»';
+const BANK = 'Банк', BANK_GEN = 'Банку', BANK_LEGAL = 'АТ «Банк»';
 const MARK = `<span class="bankmark"><i aria-hidden="true"></i>${BANK}</span>`;
 const IBAN = 'UA•• 300528 •••• •••• •••• •••• 4417';
 const LIMIT = 6000000, RATE = 21, SHARE = 0.8;      // демо-параметри пропозиції банку
@@ -402,11 +400,11 @@ function renderMail(){
   let list = S.mails.map(x=>{const c=mailContent(x);return `<button class="mi ${x.id===S.sel?'on':''} ${x.unread?'unread':''}" data-a="mail" data-k="${x.id}">
       <div class="top"><b>${c.from}</b><span>${fmtD(x.at)}</span></div><div class="subj">${esc(c.subj)}</div></button>`}).join('');
   const c = m ? mailContent(m) : null;
-  $('main').innerHTML = `<div class="pagehead"><div><h1>Пошта клієнта</h1><p>Так листи SmartTender виглядають у поштовій скриньці постачальника. Кнопки в листах ведуть у кабінет.</p></div></div>
+  $('main').innerHTML = `<div class="pagehead"><div><h1>Пошта клієнта</h1><p>Так листи Тендер+ виглядають у поштовій скриньці постачальника. Кнопки в листах ведуть у кабінет.</p></div></div>
    <div class="mail"><div class="inbox"><h2>Вхідні · info@budtranspostach.ua</h2>${list}</div>
-   <div class="letter">${c?`<div class="meta"><h2>${esc(c.subj)}</h2>Від: ${c.from} &lt;noreply@smarttender&gt; · ${fmtD(m.at)}</div>
-     <div class="em"><div class="em-top"><div class="logo" style="font-size:16px"><i aria-hidden="true"></i>SmartTender</div><span class="x-otp">× ${BANK}</span></div>
-     <div class="em-in">${c.body}</div><div class="em-foot">Ви отримали цей лист, бо є учасником торгів на SmartTender. Фінансування надає ${BANK_LEGAL}; SmartTender діє як агент банку.</div></div>`:'<p class="muted">Листів немає</p>'}</div></div>`;
+   <div class="letter">${c?`<div class="meta"><h2>${esc(c.subj)}</h2>Від: ${c.from} &lt;noreply@tenderplus&gt; · ${fmtD(m.at)}</div>
+     <div class="em"><div class="em-top"><div class="logo" style="font-size:16px"><i aria-hidden="true"></i>Тендер+</div><span class="x-otp">× ${BANK}</span></div>
+     <div class="em-in">${c.body}</div><div class="em-foot">Ви отримали цей лист, бо є учасником торгів на Тендер+. Фінансування надає ${BANK_LEGAL}; Тендер+ діє як агент банку.</div></div>`:'<p class="muted">Листів немає</p>'}</div></div>`;
   render.lastMail = true;
   ['mail-count','bell-count'].forEach(id=>{const u=S.mails.filter(x=>x.unread).length;$(id).textContent=u;$(id).hidden=!u;});
 }
@@ -419,15 +417,15 @@ function mailContent(m){
      <div class="r"><span>Відстрочка оплати</span><b>${t.def} днів</b></div></div>`;
   const hi = '<p>Добрий день!</p>';
   switch(m.kind){
-    case 'available': return {from:'SmartTender', subj:`Фінансування доступне по тендеру ${t.id}`,
-      body:`${hi}<p>Вітаємо з перемогою! Замовник оплатить цей договір через ${t.def} днів. Ви можете отримати кошти раніше: банк-партнер ${BANK} профінансує угоду.</p>${card}
+    case 'available': return {from:'Тендер+', subj:`Фінансування доступне по тендеру ${t.id}`,
+      body:`${hi}<p>Вітаємо з перемогою! Замовник оплатить цей договір через ${t.def} днів. Ви можете отримати кошти раніше: банк-партнер профінансує угоду.</p>${card}
       <p>Що потрібно: подати фінансову звітність у кабінеті, отримати пропозицію банку і відкрити рахунок онлайн (якщо рахунку в ${BANK_GEN} ще немає). Замовник про фінансування не повідомляється.</p>
       <p><button class="btn btn-p" data-a="mailgo" data-k="${t.key}">Отримати фінансування</button></p>`};
-    case 'submitted': return {from:'SmartTender', subj:`Заявку на фінансування передано в банк — ${t.id}`,
+    case 'submitted': return {from:'Тендер+', subj:`Заявку на фінансування передано в банк — ${t.id}`,
       body:`${hi}<p>Ми передали ваші документи до ${BANK_GEN}. Банк розгляне заявку і надішле пропозицію: загальний ліміт, суму за цією угодою та ставку.</p>${card}
       <p>Відповідь прийде на цю пошту і з'явиться в кабінеті, у розділі «Мої перемоги».</p>
       <p><button class="btn btn-s" data-a="mailcab" data-k="${t.key}">Відкрити кабінет</button></p>`};
-    case 'offer': { const o=t.offer; return {from:BANK+' через SmartTender', subj:`Пропозиція фінансування по тендеру ${t.id}`,
+    case 'offer': { const o=t.offer; return {from:BANK+' через Тендер+', subj:`Пропозиція фінансування по тендеру ${t.id}`,
       body:`${hi}<p>${BANK} розглянув вашу заявку і готовий профінансувати угоду.</p>
       <div class="em-card"><div class="r"><span>Загальний ліміт</span><b class="num">${fmtM(o.limit)}</b></div>
       <div class="r"><span>Сума за угодою</span><b class="num">${fmtM(o.deal)}</b></div>
@@ -439,13 +437,13 @@ function mailContent(m){
       <p><button class="btn btn-otp" data-a="mailconf" data-k="${t.key}">Підтвердити пропозицію</button></p>`
         : `<p>Щоб отримати кошти, відкрийте рахунок у ${BANK_GEN} онлайн. Це займе близько 15 хвилин.</p>
       <p><button class="btn btn-otp" data-a="mailacc" data-k="${t.key}">Відкрити рахунок у ${BANK_GEN}</button></p>`}`};}
-    case 'confirmed': { const o=t.offer; return {from:BANK+' через SmartTender', subj:`Пропозицію підтверджено — ${t.id}`,
+    case 'confirmed': { const o=t.offer; return {from:BANK+' через Тендер+', subj:`Пропозицію підтверджено — ${t.id}`,
       body:`${hi}<p>Дякуємо, пропозицію фінансування підтверджено.</p>
       <div class="em-card"><div class="r"><span>Сума за угодою</span><b class="num">${fmtM(o.deal)}</b></div>
       <div class="r"><span>Ставка</span><b>${o.rate}% річних</b></div>
       <div class="r"><span>Рахунок для зарахування</span><b class="mono">${IBAN}</b></div></div>
       <p>Найближчим часом ${BANK} надішле договір фінансування на підпис КЕП. Після підписання кошти надійдуть на ваш рахунок.</p>`};}
-    case 'rejected': return {from:BANK+' через SmartTender', subj:`Рішення щодо фінансування по тендеру ${t.id}`,
+    case 'rejected': return {from:BANK+' через Тендер+', subj:`Рішення щодо фінансування по тендеру ${t.id}`,
       body:`${hi}<p>На жаль, ${BANK} не може профінансувати цю угоду.</p>${card}
       <p>Ви можете подати заявку на фінансування інших тендерів з відстрочкою оплати від 30 днів.</p>
       <p><button class="btn btn-s" data-a="mailcab" data-k="${t.key}">Перейти в кабінет</button></p>`};
@@ -472,8 +470,8 @@ function stepsHTML(states, showDocs){
 
 function openProcess(k){
   const t=byKey(k);
-  openModal(head('Фінансування за договором', `Банк-партнер ${BANK} профінансує угоду до того, як заплатить замовник`)+
-    `<div class="m-body"><p class="cobrand" style="margin:0 0 12px"><b>SmartTender</b> × ${MARK}</p>${summary(t)}${stepsHTML(null,true)}
+  openModal(head('Фінансування за договором', `Банк-партнер профінансує угоду до того, як заплатить замовник`)+
+    `<div class="m-body"><p class="cobrand" style="margin:0 0 12px"><b>Тендер+</b> × ${MARK}</p>${summary(t)}${stepsHTML(null,true)}
      <div class="note">Замовник про фінансування не повідомляється. Розгляд заявки — до 3 робочих днів. Подання заявки ні до чого вас не зобов’язує.</div></div>
      <div class="m-foot"><button class="btn btn-s" data-a="close">Пізніше</button><button class="btn btn-p" data-a="upload" data-k="${k}">Подати документи</button></div>`);
 }
@@ -507,7 +505,7 @@ function drawUpload(){
 }
 function upHTML(d){
   const f = UP.files[d.key], err = UP.err[d.key];
-  const fmt = d.auto ? 'з торгів SmartTender' : d.fmt.map(x=>x.toUpperCase()).join(', ')+` · до ${MAXMB} МБ`;
+  const fmt = d.auto ? 'з торгів Тендер+' : d.fmt.map(x=>x.toUpperCase()).join(', ')+` · до ${MAXMB} МБ`;
   let fileLine = '';
   if(f) fileLine = `<div class="file"><span class="good">✓ ${f.auto?'Додано автоматично':'Завантажено'}</span><span class="fn">${esc(f.name)}</span><span class="muted">${f.size.toFixed(1)} МБ</span></div>`;
   else if(err) fileLine = `<div class="file"><span class="bad">${esc(err)}</span></div>`;
@@ -561,7 +559,7 @@ function goBank(k){
 function openConfirm(k){
   const t=byKey(k), o=t.offer;
   openModal(head('Підтвердження пропозиції', `Пропозиція ${BANK_GEN} за тендером ${esc(t.id)}`)+
-    `<div class="m-body"><p class="cobrand" style="margin:0 0 12px"><b>SmartTender</b> × ${MARK}</p>
+    `<div class="m-body"><p class="cobrand" style="margin:0 0 12px"><b>Тендер+</b> × ${MARK}</p>
       <div class="summary"><div class="kv"><span>Сума за угодою</span><b class="num">${fmtM(o.deal)}</b></div>
       <div class="kv"><span>Ставка</span><b class="num">${o.rate}% річних</b></div><div class="kv"><span>Строк</span><b class="num">${o.term} днів</b></div></div>
       <p style="margin:0 0 6px;font-size:14px">Кошти надійдуть на ваш рахунок в ${BANK_GEN}:</p><span class="iban">${IBAN}</span>
